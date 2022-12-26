@@ -69,7 +69,6 @@ public class BuyingTourTest {
 
     @Test
     void testInvalidSymbolsNumberCard() {
-//        var card = DataHelper.getNumberCard("other");
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
         var buyingTour = paymentCartPage.InvalidSymbolsNumberCard();
