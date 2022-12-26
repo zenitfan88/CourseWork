@@ -5,7 +5,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import ru.netology.data.DBHelper;
 import ru.netology.data.DataHelper;
-import ru.netology.ru.netology.page.BuyTurPage;
+import ru.netology.page.BuyTurPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static ru.netology.data.DBHelper.*;
