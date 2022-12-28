@@ -35,196 +35,317 @@ public class BuyingTourTest {
 
     @Test
     void testPaymentOperationSuccessfully() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.PaymentOperation(card);
-        paymentCartPage.OperationApproved();
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.operationApproved();
         Assertions.assertEquals("APPROVED", getStatusOperationActual());
     }
 
     @Test
     void testPaymentOperationDenied() {
-        var card = DataHelper.getNumberCard("declined");
+        var number = DataHelper.getNumberCard("declined");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.PaymentOperation(card);
-        paymentCartPage.OperationRejected();
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.operationRejected();
         Assertions.assertEquals("DECLINED", getStatusOperationActual());
     }
 
+
     @Test
     void testEmptyNumberCard() {
+        var number=DataHelper.getEmptyNumberCard();
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.EmptyNumberCard();
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.fieldRequiredError();
     }
 
     @Test
     void testNullNumberCard() {
+        var number=DataHelper.getNumberCardNull();
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.NullNumberCard();
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.incorrectNumberCardError();
     }
 
     @Test
     void testInvalidSymbolsNumberCard() {
+        var number=DataHelper.getInvalidSymbolsNumberCard();
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.InvalidSymbolsNumberCard();
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatError();
     }
 
     @Test
     void testPaymentOperationUnknowCard() {
-        var card = DataHelper.getNumberCard("other");
+        var number=DataHelper.getNumberCard("other");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.PaymentOperation(card);
-        paymentCartPage.OperationRejected();
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.operationRejected();
         Assertions.assertEquals(null, getStatusOperationActual());
     }
 
     @Test
     void testEmptyMounthCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getEmptyMounthCard();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.EmptyMounth(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.fieldRequiredError();
     }
 
     @Test
     void testNullMounthCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardNull();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.NullMounth(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatError();
     }
 
     @Test
     void testMounthOverValid() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardOverValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.MounthOverValid(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatError();
     }
 
     @Test
     void testInvalidSymbolsMounth() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardInvalidSymbols();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.InvalidSymbolsMounth(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatError();
     }
 
     @Test
     void testEmptyYearCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getEmptyYearCard();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.EmptyYear(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.fieldRequiredError();
     }
 
     @Test
     void testInvalidYearCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardUnderValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.InvalidYear(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidYearError();
     }
 
     @Test
     void testNullYearCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardNull();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.NullYear(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatError();
     }
 
     @Test
     void testInvalidSymbolsYearCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardInvalidSymbols();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.InvalidSymbolsYear(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatError();
     }
 
     @Test
     void testEmptyOwnerCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getEmptyOwnerCard();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.EmptyOwner(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.fieldRequiredError();
     }
 
     @Test
     void testOwnerCyrillicCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardCyrillic();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.OwnerCyrillic(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatOwnerError();
     }
 
     @Test
     void testNumbersOwnerCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardNumbers();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.OwnerNumbers(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatOwnerError();
     }
 
     @Test
     void testOwnerSymbolsCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardSymbols();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.OwnerSymbols(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatOwnerError();
     }
 
     @Test
     void testOwnerCyrillicAndSymbolsCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardCyrillicAndSymbols();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.OwnerCyrillicAndSymbols(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatOwnerError();
     }
 
     @Test
     void testOwnerLatinAndSymbolsCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardLatinAndSymbols();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.OwnerLatinAndSymbols(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatOwnerError();
     }
 
     @Test
     void testOwnerLongString() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardLongString();
+        var cvv = DataHelper.getCvvCardValid();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.OwnerLongString(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.ownerLongStringError();
     }
 
     @Test
     void testEmptyCvvCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardEmpty();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.EmptyCvv(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.fieldRequiredError();
     }
 
     @Test
     void testInvalidSymbolsCvvCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardInvalidSymbols();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.InvalidSymbolsCvv(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatError();
     }
 
     @Test
     void testNullCvvCard() {
-        var card = DataHelper.getNumberCard("approved");
+        var number = DataHelper.getNumberCard("approved");
+        var mounth = DataHelper.getMounthCardValid();
+        var year = DataHelper.getYearCardValid();
+        var owner = DataHelper.getOwnerCardValid();
+        var cvv = DataHelper.getCvvCardNull();
         var buyTurPage = new BuyTurPage();
         var paymentCartPage = buyTurPage.payment();
-        var buyingTour = paymentCartPage.NullCvv(card);
+        paymentCartPage.paymentOperation(number, mounth, year, owner, cvv);
+        paymentCartPage.invalidFormatError();
     }
 }

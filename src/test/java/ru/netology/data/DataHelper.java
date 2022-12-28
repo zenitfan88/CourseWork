@@ -1,8 +1,10 @@
 package ru.netology.data;
 
 import com.github.javafaker.Faker;
-import lombok.SneakyThrows;
 import lombok.Value;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DataHelper {
 
@@ -16,7 +18,7 @@ public class DataHelper {
         String number;
     }
 
-    @SneakyThrows
+
     public static NumberCard getNumberCard(String card) {
         if (card.equals("approved")) {
             return new NumberCard("1111 2222 3333 4444");
@@ -35,13 +37,17 @@ public class DataHelper {
         return new NumberCard("1234 56");
     }
 
+    public static NumberCard getEmptyNumberCard() {
+        return new NumberCard("");
+    }
+
     @Value
     public static class MounthCard {
         String mounth;
     }
 
     public static MounthCard getMounthCardValid() {
-        return new MounthCard("08");
+        return new MounthCard(LocalDate.now().format(DateTimeFormatter.ofPattern("MM")));
     }
 
     public static MounthCard getMounthCardNull() {
@@ -56,13 +62,17 @@ public class DataHelper {
         return new MounthCard(String.valueOf(faker.number().numberBetween(0, 9)));
     }
 
+    public static MounthCard getEmptyMounthCard() {
+        return new MounthCard("");
+    }
+
     @Value
     public static class YearCard {
         String year;
     }
 
     public static YearCard getYearCardValid() {
-        return new YearCard(String.valueOf(faker.number().numberBetween(23, 27)));
+        return new YearCard(LocalDate.now().plusYears(5).format(DateTimeFormatter.ofPattern("yy")));
     }
 
     public static YearCard getYearCardNull() {
@@ -70,11 +80,15 @@ public class DataHelper {
     }
 
     public static YearCard getYearCardUnderValid() {
-        return new YearCard(String.valueOf(faker.number().numberBetween(10, 21)));
+        return new YearCard(LocalDate.now().minusYears(1).format(DateTimeFormatter.ofPattern("yy")));
     }
 
     public static YearCard getYearCardInvalidSymbols() {
         return new YearCard(String.valueOf(faker.number().numberBetween(0, 9)));
+    }
+
+    public static YearCard getEmptyYearCard() {
+        return new YearCard("");
     }
 
     @Value
@@ -110,21 +124,29 @@ public class DataHelper {
         return new OwnerCard(faker.letterify("???????????????????????????????????????????????????????????"));
     }
 
+    public static OwnerCard getEmptyOwnerCard() {
+        return new OwnerCard("");
+    }
+
     @Value
-    public static class CodeCvvCard {
-        String code;
+    public static class CvvCard {
+        String cvv;
     }
 
-    public static CodeCvvCard getCodeCvvCardValid() {
-        return new CodeCvvCard(faker.numerify("###"));
+    public static CvvCard getCvvCardValid() {
+        return new CvvCard(faker.numerify("###"));
     }
 
-    public static CodeCvvCard getCodeCvvCardNull() {
-        return new CodeCvvCard("000");
+    public static CvvCard getCvvCardNull() {
+        return new CvvCard("000");
     }
 
-    public static CodeCvvCard getCodeCvvCardInvalidSymbols() {
-        return new CodeCvvCard(faker.numerify("2"));
+    public static CvvCard getCvvCardInvalidSymbols() {
+        return new CvvCard(faker.numerify("2"));
+    }
+
+    public static CvvCard getCvvCardEmpty() {
+        return new CvvCard("");
     }
 
 }
