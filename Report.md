@@ -3,13 +3,13 @@
 
 *При проведении тестирования 8 тестов завершилось успешно:*   
 1.[Успешная покупка тура](https://github.com/zenitfan88/CourseWork/blob/79bda02d4933ac1237e3d52c23768ae7c9a95dfb/src/test/java/ru/netology/test/BuyingTourTest.java#L37).  
-2.
-3.
-4.
-5.
-6.
-7.
-8.
+2. [Покупка тура при незаполненном поле "Владелец"](https://github.com/zenitfan88/CourseWork/blob/d5fd824ff884515ac3688fcfdd7bcbd1e601bac7/src/test/java/ru/netology/test/BuyingTourTest.java#L223).  
+3.[Покупка тура при заполнении поля "CVC/CVV" не валидным количеством символов](https://github.com/zenitfan88/CourseWork/blob/d5fd824ff884515ac3688fcfdd7bcbd1e601bac7/src/test/java/ru/netology/test/BuyingTourTest.java#L327).  
+4.[Покупка тура при заполнении поля "Месяц" не валидным количеством символов](https://github.com/zenitfan88/CourseWork/blob/d5fd824ff884515ac3688fcfdd7bcbd1e601bac7/src/test/java/ru/netology/test/BuyingTourTest.java#L158).  
+5.[Покупка тура при заполнении поля "Номер карты" не валидным количеством символов](https://github.com/zenitfan88/CourseWork/blob/d5fd824ff884515ac3688fcfdd7bcbd1e601bac7/src/test/java/ru/netology/test/BuyingTourTest.java#L92).  
+6.[Покупка тура при заполнении поля "Год", значением ранее текущей даты](https://github.com/zenitfan88/CourseWork/blob/d5fd824ff884515ac3688fcfdd7bcbd1e601bac7/src/test/java/ru/netology/test/BuyingTourTest.java#L210).  
+7.[Покупка тура при заполнении поля "Год" не валидным количеством символов](https://github.com/zenitfan88/CourseWork/blob/d5fd824ff884515ac3688fcfdd7bcbd1e601bac7/src/test/java/ru/netology/test/BuyingTourTest.java#L184).  
+8.[Покупка тура при использовании номера карты не известной банку](https://github.com/zenitfan88/CourseWork/blob/d5fd824ff884515ac3688fcfdd7bcbd1e601bac7/src/test/java/ru/netology/test/BuyingTourTest.java#L105).  
 
 *16 тестов завершилось с ошибкой:*  
 1.[Отказ банка при покупке тура](https://github.com/zenitfan88/CourseWork/blob/14a4d770710dd6d97206243e31b3faef4da20c64/src/test/java/ru/netology/test/BuyingTourTest.java#L47).  
@@ -45,8 +45,12 @@
 16.[Покупка тура при заполнении поля "CVC/CVV" нулями](https://github.com/zenitfan88/CourseWork/blob/14a4d770710dd6d97206243e31b3faef4da20c64/src/test/java/ru/netology/test/BuyingTourTest.java#L224).  
 [Баг репорт](https://github.com/zenitfan88/CourseWork/issues/12).  
 
+![AllureReport](https://user-images.githubusercontent.com/105923354/209808185-1b8ceec7-29fa-40e5-af7e-fc3c2bc0b5f8.png)
+
 Процентное соотношение успешных и неуспешных тестов составило: 33% к 66% соответственно.  
 3 обнаруженных дефекта имеют уровень серьезности "Critical", 8 дефектов имеют уровень серьезности "Major", 6 дефектов имеют уровень серьезности "Minor".
 
-Общие рекомендации:
-Необходимо срочное исправление дефектов с уровнем серьезности "Critical", влияющих на работоспособность формы покупки тура, а так же доработка вывода корректных сообщений об ошибках при заполнении полей невалидными значениями.
+**Общие рекомендации:**  
+- Необходимо срочное исправление дефектов с уровнем серьезности "Critical", влияющих на работоспособность формы покупки тура;
+- Доработка вывода корректных сообщений об ошибках при заполнении полей невалидными значениями;
+- Ограничение на введение в поле "Владелец" любых символов, кроме латинских букв и пробелов.
